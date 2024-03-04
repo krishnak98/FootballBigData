@@ -1,0 +1,25 @@
+
+case class FootballEvent(
+                          id_odsp: String,
+                          id_event: String,
+                          sort_order: Int,
+                          game_minute: Int,
+                          text: String,
+                          event_type: Int,
+                          event_type2: String,
+                          side: Int,
+                          event_team: String,
+                          opponent: String,
+                          player: String,
+                          player2: String,
+                          player_in: String,
+                          player_out: String,
+                          shot_place: String,
+                          shot_outcome: String,
+                          is_goal: Int,
+                          location: String,
+                          bodypart: String,
+                          assist_method: Int,
+                          situation: String,
+                          fast_break: Int
+                        )

@@ -1,0 +1,53 @@
+
+Copy data to Hadoop: 
+scp -i ~/.ssh/kamathk_mpcs53014.pem -r ./football_data/  hadoop@ec2-3-131-137-149.us-east-2.compute.amazonaws.com:/home/hadoop/kamathk/  
+
+Convert to HDFS: 
+hdfs dfs -put /home/hadoop/kamathk/football_data ~/kamathk/
+
+Tables: 
+| kamathk_football_events                   |
+| kamathk_events_player                     |
+| kamathk_events_player_hbase               |
+
+
+football_events.hql
+player_data.hql
+create 'kamathk_events_player_hbase' , 'player_info'
+create_hbase.hql
+write_to_hbase.hql
+
+Test hbase: 
+get 'kamathk_events_player_hbase' , 'lionel messi'
+
+
+SCPs 
+scp -i ~/.ssh/kamathk_mpcs53014.pem -r /Users/krishnakamath/Documents/MPCS/BigData/project/kamathk_kafka_consumer/target/uber-kamathk_kafka_consumer-1.0-SNAPSHOT.jar  hadoop@ec2-3-131-137-149.us-east-2.compute.amazonaws.com:/home/hadoop/kamathk/
+
+scp -i ~/.ssh/kamathk_mpcs53014.pem -r /Users/krishnakamath/Documents/MPCS/BigData/project/kamathk_kafka/target/uber-kamathk_kafka-1.0-SNAPSHOT.jar  hadoop@ec2-3-131-137-149.us-east-2.compute.amazonaws.com:/home/hadoop/kamathk/
+
+
+create kafka topics:
+kafka-topics.sh --create --zookeeper z-3.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:2181,z-1.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:2181,z-2.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:2181 --replication-factor 2 --partitions 1 --topic mpcs53014_kamathk_football_stream
+
+producer:
+kafka-console-producer.sh --broker-list b-3.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-1.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-2.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092 --topic mpcs53014_kamathk_football_stream
+
+
+consumer: 
+kafka-console-consumer.sh --bootstrap-server b-3.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-1.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-2.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092 --topic mpcs53014_kamathk_football_stream --from-beginning
+
+
+Running the jars: 
+Producer: 
+java -cp uber-kamathk_kafka-1.0-SNAPSHOT.jar org.example.StreamEventsIntoKafka "b-1.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-2.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-3.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092"
+
+Consumer: 
+spark-submit   --master local[2]  --driver-java-options "-Dlog4j.configuration=file:///home/hadoop/ss.log4j.properties"   --class StreamEvents   uber-kamathk_kafka_consumer-1.0-SNAPSHOT.jar  b-2.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-1.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-3.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092
+
+
+Run node locally:
+node app.js 3094 localhost 8070 b-2.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-3.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-1.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092
+
+run node on ec2: 
+node app.js 3091 ec2-3-131-137-149.us-east-2.compute.amazonaws.com 8070 b-2.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-3.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092,b-1.mpcs53014kafka.o5ok5i.c4.kafka.us-east-2.amazonaws.com:9092

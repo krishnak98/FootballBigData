@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+  <head>
+    <title>Player Stats</title>
+    <link type="text/css" rel="stylesheet" href="elegant-aero.css" />
+    <style>
+      input[type=text]{
+    width:100%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+  }
+  
+  input[type=text]:focus{
+    border-color:dodgerBlue;
+    box-shadow:0 0 8px 0 dodgerBlue;
+  }
+  
+    </style>
+  </head>
+  <body style="margin:0px;padding:0px;overflow:hidden">
+    <p style="margin-bottom:2cm" />
+      
+    <form action="/player_stats.html" style="width:300px;margin:0 auto;margin-top:20px;background:#FFFFFF" method="get" target="results_iframe" class="elegant-aero">
+      <label>
+	<span>Player:</span>
+	<input type="text" name="player" placeholder="Name"/>
+      </label>
+      <label>
+	<span></span> <input  type="submit" value="Submit">
+      </label>
+    </form>
+      <iframe frameborder="0" name="results_iframe" style="overflow:hidden;height:80%;width:100%" ></iframe>
+
+  </body>
+</html>

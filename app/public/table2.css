@@ -1,0 +1,91 @@
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container {
+  flex-basis: 50%;
+  padding: 20px;
+}
+
+.chart-container {
+  flex-basis: 50%;
+  padding: 20px;
+}
+.table-resp {
+  border-collapse: collapse;
+  margin: 1em auto;
+}
+
+.table-resp caption {
+  text-align: left;
+  width: 95vw; /* Screws up table width until positioning below */
+  /* caption-side: top-outside; Firefox-only for now */
+}
+
+@media (min-width: 768px) { /* sm, md, lg */
+  .table-resp {
+    position: relative; /* Used below to give position: absolute context */
+  }
+  
+  .table-resp caption {
+    position: absolute; /* Fixes table width broken by width: 95vw above */
+    top: -2em;
+    margin-bottom: .75em;
+  }
+
+  .table-resp thead {
+    text-align: left;
+    background-color: #333;
+    color: white;
+  }
+
+  .table-resp tbody tr:nth-child(odd) {
+    /* background-color: hsl(0, 0%, 94%); */
+  }
+
+  .table-resp tbody tr:nth-child(even) {
+    /* background-color: hsl(0, 0%, 88%); */
+  }
+
+  .table-resp td,
+  .table-resp th {
+    padding: .25em .5em;
+  }
+
+  .table-resp td:nth-child(2) {
+    border-left: 3px solid #fff;
+  }
+}
+
+@media (max-width: 767px) { /* xs */
+  thead {
+    display: none;
+  }
+
+  .table-resp {
+    display: block;
+    margin-top: 1em;
+  }
+
+  td {
+    display: block;
+  }
+
+  td:first-child {
+    font-weight: 700;
+    margin-top: .75em;
+    margin-bottom: 0;
+  }
+
+  td:nth-child(2) {
+    margin-top: 0;
+  }
+}
+
+/* Uninteresting stuff below here */
+
+html {
+  font: 18px "Iowan Old Style", serif;
+}
