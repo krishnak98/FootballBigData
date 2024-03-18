@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS kamathk_events_player AS 
+CREATE TABLE IF NOT EXISTS events_player AS 
 (SELECT
     player,
     SUM(CASE WHEN is_goal = 1 THEN 1 ELSE 0 END) AS goals,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS kamathk_events_player AS
     SUM(CASE WHEN event_type = 6 OR event_type = 5 THEN 1 ELSE 0 END) AS red_cards,
     SUM(CASE WHEN event_type = 1 THEN 1 ELSE 0 END) AS shots,
     SUM(CASE WHEN event_type = 1 and shot_outcome != 2  THEN 1 ELSE 0 END) AS shots_on_target
-FROM kamathk_football_events
+FROM football_events
 WHERE player IS NOT NULL AND player != '' AND player != 'NA' 
 GROUP BY player
 );

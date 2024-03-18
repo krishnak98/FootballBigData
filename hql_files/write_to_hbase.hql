@@ -1,4 +1,4 @@
-INSERT OVERWRITE TABLE kamathk_events_player_hbase
+INSERT OVERWRITE TABLE events_player_hbase
 SELECT 
     player,
     goals,
@@ -11,4 +11,4 @@ SELECT
     red_cards,
     shots,
     shots_on_target
-FROM kamathk_events_player
+FROM events_player

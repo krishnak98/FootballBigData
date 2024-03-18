@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE kamathk_football_events (
+CREATE EXTERNAL TABLE football_events (
     id_odsp STRING, 
     id_event STRING, 
     sort_order SMALLINT, 

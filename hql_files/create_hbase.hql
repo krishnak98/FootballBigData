@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS kamathk_events_player_hbase (
+CREATE EXTERNAL TABLE IF NOT EXISTS events_player_hbase (
     player STRING,
     goals BIGINT,
     goals_righty BIGINT,
@@ -19,6 +19,6 @@ WITH SERDEPROPERTIES (
     player_info:red_cards#b,player_info:shots#b,player_info:shots_on_target#b'
 )
 TBLPROPERTIES (
-    'hbase.table.name' = 'kamathk_events_player_hbase'
+    'hbase.table.name' = 'events_player_hbase'
 );
 

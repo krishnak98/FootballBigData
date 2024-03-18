@@ -22,7 +22,7 @@ object StreamEvents {
   hbaseConf.set("hbase.zookeeper.quorum", "localhost")
 
   val hbaseConnection = ConnectionFactory.createConnection(hbaseConf)
-  val goalsByPlayer = hbaseConnection.getTable(TableName.valueOf("kamathk_events_player_hbase"))
+  val goalsByPlayer = hbaseConnection.getTable(TableName.valueOf("events_player_hbase"))
 
     def incrementDelaysByRoute(fevent: FootballEvent) : String = {
       var details = ""
@@ -110,7 +110,7 @@ object StreamEvents {
     val ssc = new StreamingContext(sparkConf, Seconds(2))
 
     // Create direct kafka stream with brokers and topics
-    val topicsSet = Set("mpcs53014_kamathk_football_stream")
+    val topicsSet = Set("mpcs53014_football_stream")
     // Create direct kafka stream with brokers and topics
     val kafkaParams = Map[String, Object](
       "bootstrap.servers" -> brokers,

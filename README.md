@@ -8,9 +8,9 @@ I used some python scripts to clean the data. Since my data was csv, some text f
 I then split the data into 2 parts, 99% for the batch layer, and 1% for mocking the speed layer streaming. 
 I then moved these to hdfs
 I created 3 tables for managing data:
-kamathk_football_events - these have all the events from the batch layer csv data
-kamathk_events_player (managed by hive) - I group entries of kamathk_football_events by player name. I remove any entries that don't contain player name, or player name is empty/null
-kamathk_events_player_hbase - this is created in HBase, and contains the same columns as kamathk_events_player
+football_events - these have all the events from the batch layer csv data
+events_player (managed by hive) - I group entries of football_events by player name. I remove any entries that don't contain player name, or player name is empty/null
+events_player_hbase - this is created in HBase, and contains the same columns as events_player
 
 For creating these tables, I ran (in order)
 1. football_events.hql 
@@ -18,19 +18,19 @@ For creating these tables, I ran (in order)
 3. create_hbase.hql
 4. write_to_hbase.hql 
 
-In app/ folder, my app.js queries the kamathk_events_player_hbase HBase table, and I display the results using some basic HTML and CSS. 
+In app/ folder, my app.js queries the events_player_hbase HBase table, and I display the results using some basic HTML and CSS. 
 
-Kakfa topic name - mpcs53014_kamathk_football_stream
+Kakfa topic name - mpcs53014_football_stream
 
 I created a kafka topic, which streams all the football events. 
 
-My event streaming ingestion codebase is kamathk_kafka, and consumer is kamathk_kafka_consumer. These have been created using the archetypes given in MPCS53014, mentioned in class.
+My event streaming ingestion codebase is kafka, and consumer is kafka_consumer. These have been created using the archetypes given in MPCS53014, mentioned in class.
 
-kamathk_kafka
+kafka_producer
 1. FootballEvent - POJO. Just contains the event fields and their getters/setters
 2. StreamEventsIntoKafka - Reads data from football_events_speed_data.csv (PLEASE ENSURE this csv file is present in the same folder as your uberjar). Each event from the CSV file is read and placed onto the message queue in blocks of 10. The program retrieves new blocks every 2 seconds. I chose this interval because it aligns with the expected frequency of realistic data. On average, an event occurs approximately every minute. Considering the likelihood of multiple games running simultaneously, this timeframe seemed to be a reasonable estimate.
 
-kamathk_kafka_consumer
+kafka_consumer
 1. FootballEvent - Plain object in Scala
 2. StreamEvents - This reads data from our kafka topic, and then updates the appropriate entries in HBase. One change is that I needed to add boolean columns_to_be_updated, to check if any column needed updating. This is because there are a lot of irrelevant (to my app) events, like substitutions. 
 
@@ -38,7 +38,7 @@ kamathk_kafka_consumer
 Issues/Future Work
 1. Add more fields to Hbase. 
 2. Show player trends through the years. 
-3. Currently, if information about the current index and blocks is inside kamathk_kafka, which is not ideal. This needs to be moved to a file or Zookeeper.
+3. Currently, if information about the current index and blocks is inside kafka, which is not ideal. This needs to be moved to a file or Zookeeper.
 4. Get real time data. I was looking at something like https://towardsdatascience.com/embedding-the-language-of-football-using-nlp-e52dc153afa6, but couldn't execute it due to time constraints.
 
 

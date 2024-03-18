@@ -33,7 +33,7 @@ function rowToMap(value) {
 }
 
 
-hclient.table('kamathk_events_player_hbase').row('lionel messi').get((error, value) => {
+hclient.table('events_player_hbase').row('lionel messi').get((error, value) => {
 	console.info(rowToMap(value))
 })
 
@@ -42,7 +42,7 @@ app.use(express.static('public'));
 app.get('/player_stats.html',function (req, res) {
     const player=req.query['player'].toLowerCase();
 
-	hclient.table('kamathk_events_player_hbase').row(player).get(function (err, cells) {
+	hclient.table('events_player_hbase').row(player).get(function (err, cells) {
 		const playerInfo = rowToMap(cells);
 		const shotsOnTarget = playerInfo["player_info:shots_on_target"];
 		const totalShots = playerInfo["player_info:shots"];
