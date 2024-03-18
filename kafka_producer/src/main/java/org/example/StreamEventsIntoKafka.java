@@ -24,7 +24,7 @@ public class StreamEventsIntoKafka {
         Properties props = new Properties();
         int index;
         int block_size;
-        String TOPIC = "mpcs53014_football_stream";
+        String TOPIC = "football_stream";
         KafkaProducer<String, String> producer;
 
         public Task() {
