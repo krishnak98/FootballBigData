@@ -4,9 +4,17 @@
 ![Screenshot](image.png)
 
 
-## Data Information and Preprocessing
-
+## Details
 [Football (soccer) dataset](https://www.kaggle.com/datasets/secareanualin/football-events/data) containing 9074 games, totaling 941,009 events from the biggest 5 European football leagues.
+
+Stack used:
+Java
+Scala
+HDFS
+Kafka
+Hive
+Python
+HTML + CSS
 
 Python scripts in utils/ were used to clean the CSV data, including replacing commas within text fields with colons and removing events with missing information
 The data was into 2 parts, 99% for the batch layer, and 1% for mocking the speed layer streaming, and moved to hdfs.
