@@ -44,5 +44,6 @@ kafka_consumer
 
 
 
-## Screencast demo link 
+## Demo Link 
 https://www.loom.com/share/763728e9f38d491ebbf8bbccecba1ec1?sid=fd012189-7f53-4f21-a700-45c61064333d
+Note: This is a screenshare to demonstrate the functionality of the speed layer on the UI.
