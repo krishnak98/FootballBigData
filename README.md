@@ -1,5 +1,3 @@
-Name: Krishna Jaikumar Kamath
-Date: 7th Dec 2023
 
 Dataset: https://www.kaggle.com/datasets/secareanualin/football-events/data
 
