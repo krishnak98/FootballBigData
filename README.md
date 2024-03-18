@@ -1,5 +1,5 @@
 
-![Screenshot]('./image.png')
+![Screenshot](image.png)
 
 
 Dataset: https://www.kaggle.com/datasets/secareanualin/football-events/data
