@@ -33,7 +33,7 @@ In app/ folder, my app.js queries the events_player_hbase HBase table, and I dis
 
 A Kafka topic named football_stream was created to stream all incoming (mocked) football events.
 
-My event streaming ingestion codebase is kafka_producer, and consumer is kafka_consumer.
+My event streaming ingestion codebase is kafka_producer/, and consumer is kafka_consumer/.
 
 kafka_producer
 1. FootballEvent - POJO. contains the event fields and their getters/setters
@@ -43,6 +43,8 @@ kafka_consumer
 1. FootballEvent - Plain object in Scala
 2. StreamEvents - This reads data from our kafka topic, and then updates the appropriate entries in HBase. One change is that I needed to add boolean columns_to_be_updated, to check if any column needed updating. This is because there are a lot of irrelevant (to my app) events, like substitutions. 
 
+## Architecture Diagram
+![Architecture Diagram](arch.png)
 
 ## Issues/Future Work
 1. Add more fields to Hbase. 
